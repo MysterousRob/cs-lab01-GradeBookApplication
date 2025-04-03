@@ -269,7 +269,6 @@ namespace GradeBook.GradeBooks
                     gradeBookType = Enum.GetName(gradebookEnum, int.Parse(gradeBookType));
             }
 
-           
             var gradebook = (from assembly in AppDomain.CurrentDomain.GetAssemblies()
                              from type in assembly.GetTypes()
                              where type.FullName == "GradeBook.GradeBooks." + gradeBookType + "GradeBook"

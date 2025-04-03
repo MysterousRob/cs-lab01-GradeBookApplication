@@ -11,7 +11,7 @@ namespace GradeBook
     {
         public string Name { get; set; }
         public StudentType Type { get; set; }
-        public EnrolmentType Enrolment { get; set; }
+        public EnrollmentType Enrollment { get; set; }
         public List<double> Grades { get; set; }
         [JsonIgnore]
         public double AverageGrade
@@ -26,11 +26,11 @@ namespace GradeBook
         [JsonIgnore]
         public double GPA { get; set; }
 
-        public Student(string name, StudentType studentType, EnrolmentType enrollment)
+        public Student(string name, StudentType studentType, EnrollmentType enrollment)
         {
             Name = name;
             Type = studentType;
-            Enrolment = enrollment;
+            Enrollment = enrollment;
             Grades = new List<double>();
         }
 

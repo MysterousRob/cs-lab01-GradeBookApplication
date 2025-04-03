@@ -5,7 +5,7 @@ namespace GradeBook.GradeBooks
 {
     public class WseiGradeBook : BaseGradeBook
     {
-        public WseiGradingBook(string bookTitle, bool weighted) : base(bookTitle, weighted)
+        public WseiGradeBook(string bookTitle, bool weighted) : base(bookTitle, weighted)
         {
             this.Type = GradeBookType.Wsei;
         }
