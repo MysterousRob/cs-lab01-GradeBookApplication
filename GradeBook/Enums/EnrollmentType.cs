@@ -1,8 +1,10 @@
 ﻿namespace GradeBook.Enums
 {
-    public enum EnrolementType
+    public enum EnrollmentType
     {
         Campus,
-        Online
+        State,
+        National,
+        International
     }
 }
