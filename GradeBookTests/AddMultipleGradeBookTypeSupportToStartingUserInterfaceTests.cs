@@ -1,6 +1,9 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
+using System;
+using System.IO;
+using System.Linq;
 using GradeBook.UserInterfaces;
 using Xunit;
 
@@ -26,7 +29,7 @@ namespace GradeBookTests
 
             //Setup Test
             var output = string.Empty;
-            
+
             try
             {
                 using (var consoleInputStream = new StringReader("close"))
@@ -70,7 +73,7 @@ namespace GradeBookTests
 
             //Setup Test
             var output = string.Empty;
-            
+
             try
             {
                 using (var consoleInputStream = new StringReader("close"))
@@ -114,7 +117,7 @@ namespace GradeBookTests
 
             //Setup Test
             var output = string.Empty;
-            
+
 
             try
             {
@@ -142,7 +145,7 @@ namespace GradeBookTests
 
             //Test that a `RankedGradeBook` is created with the correct name when value is "ranked".
             output = string.Empty;
-            
+
 
             try
             {
@@ -169,7 +172,7 @@ namespace GradeBookTests
 
             //Test that the correct message is written to console when value isn't handled.
             output = string.Empty;
-            
+
 
             try
             {

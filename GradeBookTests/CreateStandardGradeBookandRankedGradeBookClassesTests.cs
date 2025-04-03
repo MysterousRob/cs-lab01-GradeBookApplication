@@ -96,16 +96,16 @@ namespace GradeBookTests
             var filePath = ".." + Path.DirectorySeparatorChar + ".." + Path.DirectorySeparatorChar + ".." + Path.DirectorySeparatorChar + ".." + Path.DirectorySeparatorChar + "GradeBook" + Path.DirectorySeparatorChar + "GradeBooks" + Path.DirectorySeparatorChar + "RankedGradeBook.cs";
             // Assert RankedGradeBook is in the GradeBooks folder
             Assert.True(File.Exists(filePath), "`RankedGradeBook.cs` was not found in the `GradeBooks` folder.");
-        
+
             // Get GradeBookType from the GradeBook.Enums namespace
             var gradebook = TestHelpers.GetUserType("GradeBook.GradeBooks.RankedGradeBook");
 
             // Assert RankedGradeBook was found in the GradeBook.GradeBooks namespace
             Assert.True(gradebook != null, "`RankedGradeBook` wasn't found in the `GradeBooks.GradeBook` namespace.");
-        
+
             // Test to make sure the enum RankedGradeBook is public.
             Assert.True(gradebook.IsPublic, "`GradeBook.GradeBooks.RankedGradeBook` exists, but isn't `public`.");
-        
+
             // Assert that RankedGradeBook's BaseType is BaseGradeBook
             Assert.True(gradebook.BaseType == typeof(BaseGradeBook), "`GradeBook.GradeBooks.RankedGradeBook` doesn't inherit `BaseGradeBook`");
         }
