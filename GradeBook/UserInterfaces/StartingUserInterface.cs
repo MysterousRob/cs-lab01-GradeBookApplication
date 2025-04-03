@@ -1,57 +1,99 @@
-﻿using System;
-using System.Linq;
-using GradeBook.Enums;
-using GradeBook.GradeBooks;
+﻿using GradeBook.GradeBooks;
+using System;
 
 namespace GradeBook.UserInterfaces
 {
-    public static class StartingUserInterface
+    public static class UserInterface
     {
-        public static void CommandLoop()
+        public static bool IsRunning = true;
+
+        public static void StartCommandLoop()
         {
-            string command = "";
-            while (command.ToLower() != "exit")
+            while (IsRunning)
             {
-                Console.WriteLine("Enter a command (Create, AddStudent, GradeStudent, CalculateStatistics, Exit):");
-                command = Console.ReadLine().ToLower();
-                switch (command)
-                {
-                    case "create":
-                        CreateGradeBook();
-                        break;
-                    case "exit":
-                        break;
-                    default:
-                        Console.WriteLine("Unknown command.");
-                        break;
-                }
+                Console.WriteLine("\n>> What would you like to do?");
+                var input = Console.ReadLine()?.ToLower();
+                ProcessCommand(input);
             }
         }
 
-        private static void CreateGradeBook()
+        public static void ProcessCommand(string input)
         {
-            Console.WriteLine("Enter a name for the GradeBook:");
-            var name = Console.ReadLine();
-
-            Console.WriteLine("Is this GradeBook weighted? (yes/no):");
-            var isWeighted = Console.ReadLine().ToLower() == "yes";
-
-            Console.WriteLine("Enter GradeBook type (Standard or Ranked):");
-            var type = Console.ReadLine().ToLower();
-
-            BaseGradeBook gradeBook;
-
-            if (type == "standard")
-                gradeBook = new StandardGradeBook(name, isWeighted);
-            else if (type == "ranked")
-                gradeBook = new RankedGradeBook(name, isWeighted);
+            if (input.StartsWith("create"))
+                HandleCreateCommand(input);
+            else if (input.StartsWith("load"))
+                HandleLoadCommand(input);
+            else if (input == "help")
+                DisplayHelp();
+            else if (input == "quit")
+                IsRunning = false;
             else
+                Console.WriteLine($"{input} was not recognized, please try again.");
+        }
+
+        public static void HandleCreateCommand(string input)
+        {
+            var arguments = input.Split(' ');
+            if (arguments.Length != 4)
             {
-                Console.WriteLine("Invalid GradeBook type.");
+                Console.WriteLine("Invalid command. Usage: Create 'Name' 'Type' 'Weighted (true/false)'.");
                 return;
             }
 
-            Console.WriteLine($"Created {gradeBook.Type} GradeBook: {gradeBook.Name}");
+            var name = arguments[1];
+            var type = arguments[2].ToLower();
+            if (!bool.TryParse(arguments[3], out bool isWeighted))
+            {
+                Console.WriteLine("Invalid value for 'Weighted'. Use 'true' or 'false'.");
+                return;
+            }
+
+            BaseGradeBook gradeBook = type switch
+            {
+                "standard" => new StandardGradeBook(name, isWeighted),
+                "ranked" => new RankedGradeBook(name, isWeighted),
+                "wsei" => new WseiGradeBook(name, isWeighted),
+                "esnu" => new ESNUGradingBook(name, isWeighted),
+                "one2four" => new OneToFourGradeBook(name, isWeighted),
+                "sixpoint" => new SixPointGradeBook(name, isWeighted),
+                _ => null
+            };
+
+            if (gradeBook == null)
+            {
+                Console.WriteLine($"{type} is not a supported gradebook type.");
+                return;
+            }
+
+            Console.WriteLine($"Created gradebook {name}.");
+            GradeBookUserInterface.CommandLoop(gradeBook);
+        }
+
+        public static void HandleLoadCommand(string input)
+        {
+            var parts = input.Split(' ');
+            if (parts.Length != 2)
+            {
+                Console.WriteLine("Invalid command. Usage: Load 'Name'.");
+                return;
+            }
+
+            var name = parts[1];
+            var gradeBook = BaseGradeBook.Load(name);
+
+            if (gradeBook == null)
+                return;
+
+            GradeBookUserInterface.CommandLoop(gradeBook);
+        }
+
+        public static void DisplayHelp()
+        {
+            Console.WriteLine("\nAvailable commands:");
+            Console.WriteLine("Create 'Name' 'Type' 'Weighted' - Creates a new gradebook.");
+            Console.WriteLine("Load 'Name' - Loads an existing gradebook.");
+            Console.WriteLine("Help - Displays available commands.");
+            Console.WriteLine("Quit - Exits the application.");
         }
     }
 }
