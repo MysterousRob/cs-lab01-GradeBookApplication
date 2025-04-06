@@ -21,4 +21,5 @@ namespace GradeBook.GradeBooks
             else
                 return '1';
         }
-    } 
+    }
+}
