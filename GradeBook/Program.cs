@@ -1,9 +1,9 @@
 ﻿using System;
-using GradeBook.UserInterfaces;
+using GradeBook.StartingUserinterface;
 
-namespace GradeBook.UserInterfaces
+namespace GradeBook
 {
-    public static class Program
+     class Program
     {
         public static void Main(string[] args)
         {

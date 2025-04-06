@@ -3,22 +3,22 @@ using GradeBook.Enums;
 
 namespace GradeBook.GradeBooks
 {
-    public class ESNUGradingBook : BaseGradeBook
+    public class ESNUGradeBook : BaseGradeBook
     {
-        public ESNUGradingBook(string gradeBookName, bool weighted) : base(gradeBookName, weighted)
+        public ESNUGradeBook(string name, bool isWeighted) : base(name, isWeighted)
         {
-            this.Type = GradeBookType.ESNU;
+            Type = GradeBookType.ESNU;
         }
-
-        public override char GetLetterGrade(double avgGrade)
+        public override char GetLetterGrade(double averageGrade)
         {
-            return avgGrade switch
-            {
-                >= 90 => 'E',
-                >= 70 => 'S',
-                >= 50 => 'N',
-                _ => 'U'
-            };
+            if (averageGrade >= 90)
+                return 'E';
+            if (averageGrade >= 70)
+                return 'S';
+            if (averageGrade >= 50)
+                return 'N';
+            else
+                return 'U';
         }
     }
 }

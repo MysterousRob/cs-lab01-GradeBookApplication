@@ -8,18 +8,17 @@ namespace GradeBook.GradeBooks
     {
         public OneToFourGradeBook(string name, bool isWeighted) : base(name, isWeighted)
         {
-            this.Type = GradeBookType.OneToFour;
+            Type = GradeBookType.OneToFour;
         }
-
-        public override char GetLetterGrade(double avgGrade)
+        public override char GetLetterGrade(double averageGrade)
         {
-            return avgGrade switch
-            {
-                >= 90 => '4',
-                >= 75 => '3',
-                >= 60 => '2',
-                _ => '1'
-            };
+            if (averageGrade >= 90)
+                return '4';
+            if (averageGrade >= 75)
+                return '3';
+            if (averageGrade >= 60)
+                return '2';
+            else
+                return '1';
         }
-    }
-}
+    } 
