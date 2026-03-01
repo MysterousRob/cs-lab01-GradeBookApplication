@@ -16,19 +16,16 @@ namespace GradeBook.GradeBooks
             if (Students.Count < 5)
                 throw new InvalidOperationException("Ranked grading requires at least 5 students.");
 
+            var numberOfHigherGrades = Students.Count(s => s.AverageGrade > averageGrade);
             var threshold = (int)Math.Ceiling(Students.Count * 0.2);
-            var sortedGrades = Students
-                .Select(s => s.AverageGrade)
-                .OrderByDescending(g => g)
-                .ToList();
 
-            if (sortedGrades.IndexOf(averageGrade) < threshold)
+            if (numberOfHigherGrades < threshold)
                 return 'A';
-            if (sortedGrades.IndexOf(averageGrade) < threshold * 2)
+            if (numberOfHigherGrades < threshold * 2)
                 return 'B';
-            if (sortedGrades.IndexOf(averageGrade) < threshold * 3)
+            if (numberOfHigherGrades < threshold * 3)
                 return 'C';
-            if (sortedGrades.IndexOf(averageGrade) < threshold * 4)
+            if (numberOfHigherGrades < threshold * 4)
                 return 'D';
 
             return 'F';

@@ -7,7 +7,7 @@ namespace GradeBook.GradeBooks
     {
         public SixPointGradeBook(string name, bool isWeighted) : base(name, isWeighted)
         {
-            this.Type = GradeBookType.OneToFour;
+            this.Type = GradeBookType.SixPoint;
         }
 
         public override char GetLetterGrade(double avgGrade)

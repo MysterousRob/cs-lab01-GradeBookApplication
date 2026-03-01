@@ -13,7 +13,11 @@ The C Sharp Grade Book Application is a designed to allow instructors to create 
 
 ### Commands when a gradebook is open
 
-- "Add `Name of Student` `Type of Student` `Type of Enrollment`" : Adds a new student to the open gradebook
+- "Add `Name of Student` `Type of Student` `Type of Enrollmen	t`" : Adds a new stuqZ| 
+- 
+- +
+- +
+- he open gradebook
 - "Remove `Name of Student`" : Removes a student with the provided name from the gradebook, if a student with that name exists in the gradebook
 - "List" : Lists all students in the open gradebook
 - "AddGrade `Name of Student` `Score`" : Adds to the given value to provided student's grades
@@ -34,7 +38,9 @@ If you want to use Visual Studio (highly recommended) follow these steps:
 - If you need to install Visual Studio, download it at <https://www.microsoft.com/net/download/>
   - If you're using Windows you'll want to check ".NET Core cross-platform development" on the workloads screen during installation
 - Open the `GradeBook.sln` file in Visual Studio
-- To run the application simply press the Start Debug button (green arrow) or press F5
+- q2+cmcq,
+-
+  To run the application simply press the Start Debug button (green arrow) or press F5
 - If you're using Visual Studio on Windows, to run tests open the Test menu, click Run, then click on Run all tests (results will show up in the Test Explorer)
 - If you're using Visual Studio on macOS, to run tests, select the GradeBookTests Project, then go to the Run menu, then click on Run Unit Tests (results will show up in the Unit Tests panel)
 

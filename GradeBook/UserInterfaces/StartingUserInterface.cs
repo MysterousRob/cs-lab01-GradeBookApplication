@@ -3,7 +3,7 @@ using System;
 
 namespace GradeBook.UserInterfaces
 {
-    public static class UserInterface
+    public static class StartingUserInterface
     {
         public static bool IsRunning = true;
 
@@ -20,23 +20,23 @@ namespace GradeBook.UserInterfaces
         public static void ProcessCommand(string input)
         {
             if (input.StartsWith("create"))
-                HandleCreateCommand(input);
+                CreateCommand(input);
             else if (input.StartsWith("load"))
-                HandleLoadCommand(input);
+                LoadCommand(input);
             else if (input == "help")
-                DisplayHelp();
+                HelpCommand();
             else if (input == "quit")
                 IsRunning = false;
             else
                 Console.WriteLine($"{input} was not recognized, please try again.");
         }
 
-        public static void HandleCreateCommand(string input)
+        public static void CreateCommand(string input)
         {
             var arguments = input.Split(' ');
             if (arguments.Length != 4)
             {
-                Console.WriteLine("Invalid command. Usage: Create 'Name' 'Type' 'Weighted (true/false)'.");
+                Console.WriteLine("Command not valid, Create requires a name, type of gradebook, if it's weighted (true / false).");
                 return;
             }
 
@@ -53,7 +53,7 @@ namespace GradeBook.UserInterfaces
                 "standard" => new StandardGradeBook(name, isWeighted),
                 "ranked" => new RankedGradeBook(name, isWeighted),
                 "wsei" => new WseiGradeBook(name, isWeighted),
-                "esnu" => new ESNUGradingBook(name, isWeighted),
+                "esnu" => new ESNUGradeBook(name, isWeighted),
                 "one2four" => new OneToFourGradeBook(name, isWeighted),
                 "sixpoint" => new SixPointGradeBook(name, isWeighted),
                 _ => null
@@ -69,7 +69,7 @@ namespace GradeBook.UserInterfaces
             GradeBookUserInterface.CommandLoop(gradeBook);
         }
 
-        public static void HandleLoadCommand(string input)
+        public static void LoadCommand(string input)
         {
             var parts = input.Split(' ');
             if (parts.Length != 2)
@@ -87,10 +87,10 @@ namespace GradeBook.UserInterfaces
             GradeBookUserInterface.CommandLoop(gradeBook);
         }
 
-        public static void DisplayHelp()
+        public static void HelpCommand()
         {
             Console.WriteLine("\nAvailable commands:");
-            Console.WriteLine("Create 'Name' 'Type' 'Weighted' - Creates a new gradebook.");
+            Console.WriteLine("Create 'Name' 'Type' 'Weighted' - Creates a new gradebook where 'Name' is the name of the gradebook, 'Type' is what type of grading it should use, and 'Weighted' is whether or not grades should be weighted (true or false).");
             Console.WriteLine("Load 'Name' - Loads an existing gradebook.");
             Console.WriteLine("Help - Displays available commands.");
             Console.WriteLine("Quit - Exits the application.");
